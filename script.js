@@ -177,6 +177,10 @@ add(
         "#server"
     ),
     createNavLink(
+        "Discover",
+        "#discover"
+    ),
+    createNavLink(
         "Community",
         "#community"
     ),
@@ -186,7 +190,7 @@ add(
     ),
     createNavLink(
         "Join the adventure ↓",
-        "#community",
+        "#how-to-buy",
         "nav-cta"
     )
 );
@@ -211,6 +215,10 @@ const hero = create("section", {
     className: "hero",
     id: "home"
 });
+
+hero.style.minHeight = "calc(100vh - 70px)";
+hero.style.display = "flex";
+hero.style.alignItems = "center";
 
 const heroContainer = create("div", {
     className: "container wrap hero-inner"
@@ -279,6 +287,78 @@ add(
     viewRanksButton
 );
 
+const serverIpBox = create("div", {
+    className: "server-ip-box"
+});
+
+serverIpBox.style.marginTop = "30px";
+serverIpBox.style.padding = "18px 22px";
+serverIpBox.style.border = "1px solid rgba(230, 185, 79, 0.45)";
+serverIpBox.style.background = "rgba(18, 14, 8, 0.72)";
+serverIpBox.style.width = "fit-content";
+serverIpBox.style.maxWidth = "100%";
+serverIpBox.style.boxShadow =
+    "0 10px 35px rgba(0, 0, 0, 0.2)";
+
+const serverIpLabel = create("div", {
+    text: "SERVER IP"
+});
+
+serverIpLabel.style.marginBottom = "7px";
+serverIpLabel.style.color = "#c9bfa8";
+serverIpLabel.style.fontSize = "9px";
+serverIpLabel.style.letterSpacing = "0.12em";
+
+const serverIp = create("div", {
+    text: "play.katipunansmp.com"
+});
+
+serverIp.style.color = "#f7d778";
+serverIp.style.fontFamily = '"DM Mono", monospace';
+serverIp.style.fontSize = "clamp(16px, 2.5vw, 22px)";
+serverIp.style.fontWeight = "500";
+serverIp.style.letterSpacing = "0.02em";
+serverIp.style.cursor = "pointer";
+
+const serverIpHint = create("div", {
+    text: "Click to copy"
+});
+
+serverIpHint.style.marginTop = "5px";
+serverIpHint.style.color = "#9f947e";
+serverIpHint.style.fontSize = "9px";
+
+add(
+    serverIpBox,
+    serverIpLabel,
+    serverIp,
+    serverIpHint
+);
+
+serverIp.addEventListener("click", async () => {
+    try {
+        await navigator.clipboard.writeText(
+            "play.katipunansmp.com"
+        );
+
+        serverIpHint.textContent =
+            "Copied to clipboard!";
+
+        serverIp.style.color = "#ffe9a3";
+
+        setTimeout(() => {
+            serverIpHint.textContent =
+                "Click to copy";
+
+            serverIp.style.color =
+                "#f7d778";
+        }, 1500);
+    } catch {
+        serverIpHint.textContent =
+            "play.katipunansmp.com";
+    }
+});
+
 const heroTags = create("div", {
     className: "hero-tags"
 });
@@ -304,6 +384,7 @@ add(
     heroTitle,
     heroCopy,
     heroActions,
+    serverIpBox,
     heroTags
 );
 
@@ -578,8 +659,7 @@ add(
 add(
     serverContainer,
     serverHeading,
-    perks,
-    buildGallery
+    perks
 );
 
 add(
@@ -589,17 +669,30 @@ add(
 
 main.appendChild(serverSection);
 
-const communitySection = create("section", {
-    className: "section community",
-    id: "community"
+const discoverSection = create("section", {
+    className: "section discover-section",
+    id: "discover"
 });
 
-const communityContainer = create("div", {
+const discoverContainer = create("div", {
     className: "container wrap"
 });
 
+add(
+    discoverContainer,
+    buildGallery
+);
+
+add(
+    discoverSection,
+    discoverContainer
+);
+
+main.appendChild(discoverSection);
+
 const communityPanel = create("div", {
-    className: "community-panel"
+    className: "community-panel how-community",
+    id: "community"
 });
 
 const communityIntro = create("div", {
@@ -670,18 +763,6 @@ add(
     communityIntro,
     communityCallout
 );
-
-add(
-    communityContainer,
-    communityPanel
-);
-
-add(
-    communitySection,
-    communityContainer
-);
-
-main.appendChild(communitySection);
 
 const ranksSection = create("section", {
     className: "section",
@@ -913,6 +994,7 @@ const premiumRanks = [
         perks: [
             "15 homes",
             "25 player vaults",
+            "10% /shop discount",
             "15 auction house items",
             "/kit Donatormax (weekly)",
             "20 voting keys",
@@ -1157,7 +1239,8 @@ steps.forEach(stepData => {
 add(
     howContainer,
     howHeading,
-    howGrid
+    howGrid,
+    communityPanel
 );
 
 add(
@@ -1213,6 +1296,10 @@ add(
     createNavLink(
         "The server",
         "#server"
+    ),
+    createNavLink(
+        "Discover",
+        "#discover"
     ),
     createNavLink(
         "Community",
