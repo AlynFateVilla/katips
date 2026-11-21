@@ -1,1550 +1,917 @@
-const app = document.createElement("div");
 
-app.id = "app";
+/* ==========================================
+   KATIPUNAN SMP
+   FULLSCREEN LANDING PAGE
 
-document.body.appendChild(app);
+   Original website: site.js
+   Original stylesheet: styles.css
+========================================== */
 
-const create = (tag, options = {}, ...children) => {
-    const element = document.createElement(tag);
+(() => {
+    "use strict";
 
-    if (options.className) {
-        element.className = options.className;
-    }
+    /* ======================================
+       CONFIGURATION
+    ====================================== */
 
-    if (options.id) {
-        element.id = options.id;
-    }
+    const CONFIG = {
+        websiteScript: "site.js",
 
-    if (options.text !== undefined) {
-        element.textContent = options.text;
-    }
+        banner:
+            "image/Katipunan_SMP_Banner_Animated.gif",
 
-    if (options.attributes) {
-        Object.entries(options.attributes).forEach(([name, value]) => {
-            element.setAttribute(name, value);
-        });
-    }
+        title: "WELCOME TO KATIPUNAN SMP",
 
-    children.flat(Infinity).forEach(child => {
-        if (child === null || child === undefined) {
-            return;
-        }
+        button: "ENTER WEBSITE",
 
-        if (typeof child === "string") {
-            element.appendChild(document.createTextNode(child));
-        } else {
-            element.appendChild(child);
-        }
-    });
-
-    return element;
-};
-
-const add = (parent, ...children) => {
-    children.flat(Infinity).forEach(child => {
-        if (child === null || child === undefined) {
-            return;
-        }
-
-        if (typeof child === "string") {
-            parent.appendChild(document.createTextNode(child));
-        } else {
-            parent.appendChild(child);
-        }
-    });
-
-    return parent;
-};
-
-const addStylesheet = (href, attributes = {}) => {
-    const link = document.createElement("link");
-
-    link.rel = "stylesheet";
-    link.href = href;
-
-    Object.entries(attributes).forEach(([name, value]) => {
-        link.setAttribute(name, value);
-    });
-
-    document.head.appendChild(link);
-};
-
-const googlePreconnect = create("link", {
-    attributes: {
-        rel: "preconnect",
-        href: "https://fonts.googleapis.com"
-    }
-});
-
-const fontPreconnect = create("link", {
-    attributes: {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
-        crossorigin: ""
-    }
-});
-
-document.head.append(
-    googlePreconnect,
-    fontPreconnect
-);
-
-addStylesheet(
-    "https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Press+Start+2P&display=swap"
-);
-
-addStylesheet(
-    "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css",
-    {
-        integrity:
-            "sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH",
-        crossorigin: "anonymous"
-    }
-);
-
-addStylesheet("styles.css");
-
-const header = create("header", {
-    className: "topbar"
-});
-
-const nav = create("nav", {
-    className: "nav container wrap",
-    attributes: {
-        "aria-label": "Main navigation"
-    }
-});
-
-const brand = create("a", {
-    className: "brand",
-    attributes: {
-        href: "#home"
-    }
-});
-
-const brandLogo = create("img", {
-    className: "brand-logo",
-    attributes: {
-        src: "image/katipunan-logo.png",
-        alt: "Katipunan SMP logo"
-    }
-});
-
-const brandText = create("span", {
-    text: "KATIPUNAN SMP"
-});
-
-add(
-    brand,
-    brandLogo,
-    brandText
-);
-
-const menuToggle = create("button", {
-    className: "menu-toggle",
-    attributes: {
-        type: "button",
-        "aria-label": "Open navigation menu",
-        "aria-expanded": "false",
-        "aria-controls": "nav-links"
-    },
-    text: "☰"
-});
-
-const navLinks = create("div", {
-    className: "nav-links",
-    id: "nav-links"
-});
-
-const createNavLink = (
-    text,
-    href,
-    className = ""
-) => {
-    return create("a", {
-        className,
-        attributes: {
-            href
-        },
-        text
-    });
-};
-
-add(
-    navLinks,
-    createNavLink(
-        "The server",
-        "#server"
-    ),
-    createNavLink(
-        "Discover",
-        "#discover"
-    ),
-    createNavLink(
-        "Community",
-        "#community"
-    ),
-    createNavLink(
-        "Ranks",
-        "#ranks"
-    ),
-    createNavLink(
-        "Join the adventure ↓",
-        "#how-to-buy",
-        "nav-cta"
-    )
-);
-
-add(
-    nav,
-    brand,
-    menuToggle,
-    navLinks
-);
-
-add(
-    header,
-    nav
-);
-
-app.appendChild(header);
-
-const main = create("main");
-
-const hero = create("section", {
-    className: "hero",
-    id: "home"
-});
-
-hero.style.minHeight = "calc(100vh - 70px)";
-hero.style.display = "flex";
-hero.style.alignItems = "center";
-
-const heroContainer = create("div", {
-    className: "container wrap hero-inner"
-});
-
-const eyebrow = create("div", {
-    className: "eyebrow"
-});
-
-const onlineDot = create("span", {
-    className: "online-dot"
-});
-
-add(
-    eyebrow,
-    onlineDot,
-    "YOUR SMP ADVENTURE STARTS HERE"
-);
-
-const heroTitle = create("h1");
-
-const heroTitleFirst = create("span", {
-    text: "SURVIVE. BUILD."
-});
-
-const heroTitleSecond = create("span", {
-    text: "MAKE IT YOURS."
-});
-
-add(
-    heroTitle,
-    heroTitleFirst,
-    create("br"),
-    heroTitleSecond
-);
-
-const heroCopy = create("p", {
-    className: "hero-copy",
-    text:
-        "A community-driven Minecraft survival experience where you can build, explore, trade, and create your own story."
-});
-
-const heroActions = create("div", {
-    className: "button-row"
-});
-
-const exploreButton = create("a", {
-    className: "button",
-    attributes: {
-        href: "#server"
-    },
-    text: "Explore the server"
-});
-
-const viewRanksButton = create("a", {
-    className: "button secondary",
-    attributes: {
-        href: "#ranks"
-    },
-    text: "View ranks"
-});
-
-add(
-    heroActions,
-    exploreButton,
-    viewRanksButton
-);
-
-const serverIpBox = create("div", {
-    className: "server-ip-box"
-});
-
-serverIpBox.style.marginTop = "30px";
-serverIpBox.style.padding = "18px 22px";
-serverIpBox.style.border = "1px solid rgba(230, 185, 79, 0.45)";
-serverIpBox.style.background = "rgba(18, 14, 8, 0.72)";
-serverIpBox.style.width = "fit-content";
-serverIpBox.style.maxWidth = "100%";
-serverIpBox.style.boxShadow =
-    "0 10px 35px rgba(0, 0, 0, 0.2)";
-
-const serverIpLabel = create("div", {
-    text: "SERVER IP"
-});
-
-serverIpLabel.style.marginBottom = "7px";
-serverIpLabel.style.color = "#c9bfa8";
-serverIpLabel.style.fontSize = "9px";
-serverIpLabel.style.letterSpacing = "0.12em";
-
-const serverIp = create("div", {
-    text: "play.katipunansmp.com"
-});
-
-serverIp.style.color = "#f7d778";
-serverIp.style.fontFamily = '"DM Mono", monospace';
-serverIp.style.fontSize = "clamp(16px, 2.5vw, 22px)";
-serverIp.style.fontWeight = "500";
-serverIp.style.letterSpacing = "0.02em";
-serverIp.style.cursor = "pointer";
-
-const serverIpHint = create("div", {
-    text: "Click to copy"
-});
-
-serverIpHint.style.marginTop = "5px";
-serverIpHint.style.color = "#9f947e";
-serverIpHint.style.fontSize = "9px";
-
-add(
-    serverIpBox,
-    serverIpLabel,
-    serverIp,
-    serverIpHint
-);
-
-serverIp.addEventListener("click", async () => {
-    try {
-        await navigator.clipboard.writeText(
-            "play.katipunansmp.com"
-        );
-
-        serverIpHint.textContent =
-            "Copied to clipboard!";
-
-        serverIp.style.color = "#ffe9a3";
-
-        setTimeout(() => {
-            serverIpHint.textContent =
-                "Click to copy";
-
-            serverIp.style.color =
-                "#f7d778";
-        }, 1500);
-    } catch {
-        serverIpHint.textContent =
-            "play.katipunansmp.com";
-    }
-});
-
-const heroTags = create("div", {
-    className: "hero-tags"
-});
-
-const tags = [
-    "SMP SURVIVAL",
-    "PLAYER MARKET",
-    "VOTE & KEY REWARDS"
-];
-
-tags.forEach(tag => {
-    heroTags.appendChild(
-        create("span", {
-            className: "tag",
-            text: tag
-        })
-    );
-});
-
-add(
-    heroContainer,
-    eyebrow,
-    heroTitle,
-    heroCopy,
-    heroActions,
-    serverIpBox,
-    heroTags
-);
-
-add(
-    hero,
-    heroContainer
-);
-
-main.appendChild(hero);
-
-const serverSection = create("section", {
-    className: "section",
-    id: "server"
-});
-
-const serverContainer = create("div", {
-    className: "container wrap"
-});
-
-const serverHeading = create("div", {
-    className: "section-heading"
-});
-
-add(
-    serverHeading,
-    create("p", {
-        className: "kicker",
-        text: "A world worth logging into"
-    }),
-    create("h2", {
-        text: "MAKE YOUR OWN ADVENTURE."
-    }),
-    create("p", {
-        className: "section-intro",
-        text:
-            "Build your home, explore the world, trade with other players, and find your place in a growing survival community."
-    })
-);
-
-const perks = create("div", {
-    className: "perk-grid"
-});
-
-const perkData = [
-    {
-        icon: "✦",
-        title: "Survival & Building",
-        description:
-            "Explore a survival world where your imagination decides what comes next."
-    },
-    {
-        icon: "⌂",
-        title: "Set Your Home",
-        description:
-            "Claim your space, build your base, and make your corner of the world yours."
-    },
-    {
-        icon: "◆",
-        title: "Player Economy",
-        description:
-            "Trade with other players and take part in a player-driven economy."
-    },
-    {
-        icon: "★",
-        title: "Vote & Earn Rewards",
-        description:
-            "Support the server through voting and earn useful rewards along the way."
-    }
-];
-
-perkData.forEach(perkDataItem => {
-    const perk = create("article", {
-        className: "perk"
-    });
-
-    const icon = create("div", {
-        className: "perk-icon",
-        text: perkDataItem.icon
-    });
-
-    const title = create("h3", {
-        text: perkDataItem.title
-    });
-
-    const description = create("p", {
-        text: perkDataItem.description
-    });
-
-    add(
-        perk,
-        icon,
-        title,
-        description
-    );
-
-    perks.appendChild(perk);
-});
-
-const buildGallery = create("div", {
-    className: "build-gallery"
-});
-
-const galleryHeading = create("div", {
-    className: "build-gallery-heading"
-});
-
-const galleryTitle = create("div");
-
-add(
-    galleryTitle,
-    create("p", {
-        className: "kicker",
-        text: "Made by the community"
-    }),
-    create("h2", {
-        text: "DISCOVER AMAZING BUILDS - MEET NEW PEOPLE."
-    })
-);
-
-const galleryNavigation = create("div", {
-    className: "build-gallery-navigation"
-});
-
-const galleryHint = create("p", {
-    className: "build-gallery-hint",
-    text: "Swipe or use the arrows to explore"
-});
-
-const galleryControls = create("div", {
-    className: "build-gallery-controls"
-});
-
-const previousButton = create("button", {
-    className: "build-gallery-button",
-    attributes: {
-        type: "button",
-        "aria-label": "Previous gallery item",
-        "data-gallery-direction": "-1"
-    },
-    text: "←"
-});
-
-const nextButton = create("button", {
-    className: "build-gallery-button",
-    attributes: {
-        type: "button",
-        "aria-label": "Next gallery item",
-        "data-gallery-direction": "1"
-    },
-    text: "→"
-});
-
-add(
-    galleryControls,
-    previousButton,
-    nextButton
-);
-
-add(
-    galleryNavigation,
-    galleryHint,
-    galleryControls
-);
-
-add(
-    galleryHeading,
-    galleryTitle,
-    galleryNavigation
-);
-
-const galleryTrack = create("div", {
-    className: "build-gallery-track"
-});
-
-const galleryItems = [
-    [
-        "image/survival-build.png",
-        "Golden hour at the pavilion"
-    ],
-    [
-        "image/survival-build-2.png",
-        "A grand bridge beneath the floating sword"
-    ],
-    [
-        "image/community-build-3.png",
-        "The castle plaza at sunset"
-    ],
-    [
-        "image/community-build-4.png",
-        "Rainy cathedral square"
-    ],
-    [
-        "image/community-build-6.png",
-        "Cosmetic shopfront"
-    ],
-    [
-        "image/community-build-7.png",
-        "Staff lineup showcase"
-    ],
-    [
-        "image/community-build-8.png",
-        "Floating sword monument"
-    ],
-    [
-        "image/community-build-10.png",
-        "Dream bridge overlook"
-    ],
-    [
-        "image/old-spawn.png",
-        "Old spawn"
-    ],
-    [
-        "image/bodyguards.png",
-        "Bodyguards"
-    ],
-    [
-        "image/shadow-guardians.png",
-        "Shadow Guardians"
-    ],
-    [
-        "image/rainy-house.png",
-        "Rainy seaside house"
-    ],
-    [
-        "image/cherry-garden.png",
-        "Cherry blossom gathering"
-    ],
-    [
-        "image/cherry-garden-2.png",
-        "Cherry garden event"
-    ],
-    [
-        "image/lava-castle.png",
-        "Lava fortress"
-    ]
-];
-
-galleryItems.forEach(
-    ([src, caption]) => {
-        const item = create("figure", {
-            className: "build-gallery-item"
-        });
-
-        const image = create("img", {
-            attributes: {
-                src,
-                alt: caption,
-                loading: "lazy"
-            }
-        });
-
-        const figcaption = create("figcaption", {
-            text: caption
-        });
-
-        add(
-            item,
-            image,
-            figcaption
-        );
-
-        galleryTrack.appendChild(item);
-    }
-);
-
-add(
-    buildGallery,
-    galleryHeading,
-    galleryTrack
-);
-
-add(
-    serverContainer,
-    serverHeading,
-    perks
-);
-
-add(
-    serverSection,
-    serverContainer
-);
-
-main.appendChild(serverSection);
-
-const discoverSection = create("section", {
-    className: "section discover-section",
-    id: "discover"
-});
-
-const discoverContainer = create("div", {
-    className: "container wrap"
-});
-
-add(
-    discoverContainer,
-    buildGallery
-);
-
-add(
-    discoverSection,
-    discoverContainer
-);
-
-main.appendChild(discoverSection);
-
-const communityPanel = create("div", {
-    className: "community-panel how-community",
-    id: "community"
-});
-
-const communityIntro = create("div", {
-    className: "section-intro"
-});
-
-add(
-    communityIntro,
-    create("p", {
-        className: "kicker",
-        text: "Better together"
-    }),
-    create("h2", {
-        text: "BE PART OF THE COMMUNITY."
-    }),
-    create("p", {
-        text:
-            "Stay connected with the server, meet new players, ask for support, and keep up with everything happening in Katipunan SMP."
-    })
-);
-
-const communityCallout = create("div", {
-    className: "community-callout"
-});
-
-const communityLabel = create("div", {
-    className: "rank-label",
-    text: "OFFICIAL DISCORD"
-});
-
-const communityName = create("h3", {
-    className: "rank-name",
-    text: "YOUR KATIPUNAN SMP CONTACT."
-});
-
-const communityDescription = create("p", {
-    text:
-        "Join our Discord for community updates, support, and information about premium ranks."
-});
-
-const discordButton = create("a", {
-    className: "button discord-button",
-    attributes: {
-        href: "https://discord.gg/katipunansmp",
-        target: "_blank",
-        rel: "noopener noreferrer"
-    },
-    text: "Join the Discord ↗"
-});
-
-const boosterNote = create("p", {
-    className: "booster-note",
-    text:
-        "Boost the server with an active one-month Nitro subscription to earn the Booster rank."
-});
-
-add(
-    communityCallout,
-    communityLabel,
-    communityName,
-    communityDescription,
-    discordButton,
-    boosterNote
-);
-
-add(
-    communityPanel,
-    communityIntro,
-    communityCallout
-);
-
-const ranksSection = create("section", {
-    className: "section",
-    id: "ranks"
-});
-
-const ranksContainer = create("div", {
-    className: "container wrap"
-});
-
-const ranksHeading = create("div", {
-    className: "section-heading"
-});
-
-add(
-    ranksHeading,
-    create("p", {
-        className: "kicker",
-        text: "Play, earn, rank up"
-    }),
-    create("h2", {
-        text: "GRINDABLE RANKS."
-    }),
-    create("p", {
-        className: "section-intro",
-        text:
-            "Start at Default and work your way up: Default → Bronze → Silver → Gold → Crystal. Earn each rank with playtime, in-game challenges, and money."
-    })
-);
-
-const grindRankGrid = create("div", {
-    className: "grind-rank-grid"
-});
-
-const grindRanks = [
-    {
-        name: "Bronze",
-        time: "72 HOURS",
-        requirements: [
-            ["Travel blocks", "1,000"],
-            ["Zombies", "100"],
-            ["Skeletons", "50"],
-            ["Blocks mined", "25,000"]
-        ],
-        cost: "$5M"
-    },
-    {
-        name: "Silver",
-        time: "6 DAYS",
-        requirements: [
-            ["Travel blocks", "5,000"],
-            ["Creepers", "50"],
-            ["Zombies", "200"],
-            ["Blazes", "30"],
-            ["Blocks mined", "50,000"]
-        ],
-        cost: "$10M"
-    },
-    {
-        name: "Gold",
-        time: "14 DAYS",
-        requirements: [
-            ["Travel blocks", "10,000"],
-            ["Husks", "50"],
-            ["Slimes", "30"],
-            ["Withers", "3"],
-            ["Blocks mined", "75,000"]
-        ],
-        cost: "$20M"
-    },
-    {
-        name: "Crystal",
-        time: "28 DAYS",
-        requirements: [
-            ["Wardens", "10"],
-            ["Ender Dragons", "5"],
-            ["Withers", "10"],
-            ["Blocks mined", "100,000"]
-        ],
-        cost: "$40M"
-    }
-];
-
-grindRanks.forEach(rank => {
-    const card = create("article", {
-        className: "grind-rank-card"
-    });
-
-    const label = create("div", {
-        className: "rank-label",
-        text: rank.time
-    });
-
-    const name = create("h3", {
-        className: "rank-name",
-        text: rank.name
-    });
-
-    const requirements = create("ul", {
-        className: "grind-requirements"
-    });
-
-    rank.requirements.forEach(
-        ([labelText, value]) => {
-            const item = create("li");
-
-            const labelElement = create("span", {
-                text: labelText
-            });
-
-            const valueElement = create("strong", {
-                text: value
-            });
-
-            add(
-                item,
-                labelElement,
-                valueElement
-            );
-
-            requirements.appendChild(item);
-        }
-    );
-
-    const cost = create("div", {
-        className: "grind-cost"
-    });
-
-    add(
-        cost,
-        create("span", {
-            text: "COST"
-        }),
-        create("strong", {
-            text: rank.cost
-        })
-    );
-
-    add(
-        card,
-        label,
-        name,
-        requirements,
-        cost
-    );
-
-    grindRankGrid.appendChild(card);
-});
-
-const premiumHeading = create("div", {
-    className: "section-heading rank-subsection-heading"
-});
-
-const premiumIntro = create("p", {
-    className: "section-intro"
-});
-
-add(
-    premiumHeading,
-    create("p", {
-        className: "kicker",
-        text: "Choose your upgrade"
-    }),
-    create("h2", {
-        text: "OPTIONAL PREMIUM RANKS."
-    })
-);
-
-const premiumDiscord = create("a", {
-    className: "inline-link",
-    attributes: {
-        href: "https://discord.gg/katipunansmp",
-        target: "_blank",
-        rel: "noopener noreferrer"
-    },
-    text: "Discord"
-});
-
-add(
-    premiumIntro,
-    "Contact us through our ",
-    premiumDiscord,
-    " for Donator+ and Donatormax details."
-);
-
-const premiumRankGrid = create("div", {
-    className: "row g-4"
-});
-
-const premiumRanks = [
-    {
-        name: "Donator+",
-        price: "₱250",
-        duration: "1 MONTH",
-        description:
-            "A solid upgrade for players who want more convenience, storage, and useful commands.",
-        perks: [
-            "8 homes",
-            "15 player vaults (storage)",
-            "5% /shop discount",
-            "10 auction house items",
-            "/kit Donator+",
-            "20 voting keys",
-            "30 Pinata keys",
-            "7 Legendary keys",
-            "5 Mythic keys"
-        ],
-        commands: [
-            "/repair",
-            "/nick",
-            "/chatcolor",
-            "/feed",
-            "/ptime",
-            "/workbench",
-            "/ender",
-            "/anvil",
-            "/stonecutter",
-            "/loom",
-            "/grindstone",
-            "/cartography"
-        ]
-    },
-    {
-        name: "Donatormax",
-        price: "₱500",
-        duration: "1 MONTH",
-        description:
-            "The full premium upgrade for players looking for the most convenience and additional server perks.",
-        perks: [
-            "15 homes",
-            "25 player vaults",
-            "10% /shop discount",
-            "15 auction house items",
-            "/kit Donatormax (weekly)",
-            "20 voting keys",
-            "35 Pinata keys",
-            "20 Legendary keys",
-            "16 Mythic keys"
-        ],
-        commands: [
-            "/claimfly",
-            "/nick",
-            "/repair",
-            "/chatcolor",
-            "/feed",
-            "/ptime",
-            "/workbench",
-            "/ender",
-            "/anvil",
-            "/stonecutter",
-            "/loom",
-            "/grindstone",
-            "/cartography"
-        ]
-    }
-];
-
-premiumRanks.forEach(
-    (rank, index) => {
-        const column = create("div", {
-            className: "col-md-6"
-        });
-
-        const card = create("article", {
-            className:
-                index === 1
-                    ? "rank-card featured"
-                    : "rank-card"
-        });
-
-        const label = create("div", {
-            className: "rank-label",
-            text: "PREMIUM RANK"
-        });
-
-        const name = create("h3", {
-            className: "rank-name",
-            text: rank.name
-        });
-
-        const price = create("div", {
-            className: "rank-price"
-        });
-
-        const duration = create("span", {
-            text: ` / ${rank.duration}`
-        });
-
-        add(
-            price,
-            rank.price,
-            duration
-        );
-
-        const description = create("p", {
-            className: "rank-description",
-            text: rank.description
-        });
-
-        const perksHeading = create("h4", {
-            className: "perk-heading",
-            text: "PERKS & FREEBIES"
-        });
-
-        const perksList = create("ul", {
-            className: "rank-perks"
-        });
-
-        rank.perks.forEach(perk => {
-            const item = create("li");
-
-            const code = create("code", {
-                text: perk
-            });
-
-            item.appendChild(code);
-            perksList.appendChild(item);
-        });
-
-        const commandHeading = create("h4", {
-            className: "perk-heading",
-            text: "COMMANDS"
-        });
-
-        const commandList = create("ul", {
-            className: "command-list"
-        });
-
-        rank.commands.forEach(command => {
-            const item = create("li");
-
-            const code = create("code", {
-                text: command
-            });
-
-            item.appendChild(code);
-            commandList.appendChild(item);
-        });
-
-        const getRankButton = create("a", {
-            className: "button",
-            attributes: {
-                href: "https://discord.gg/katipunansmp",
-                target: "_blank",
-                rel: "noopener noreferrer"
-            },
-            text: "Get this rank ↗"
-        });
-
-        const finePrint = create("p", {
-            className: "fine-print",
-            text:
-                "Premium ranks are optional and are not required to enjoy the server."
-        });
-
-        add(
-            card,
-            label,
-            name,
-            price,
-            description,
-            perksHeading,
-            perksList,
-            commandHeading,
-            commandList,
-            getRankButton,
-            finePrint
-        );
-
-        column.appendChild(card);
-        premiumRankGrid.appendChild(column);
-    }
-);
-
-add(
-    ranksContainer,
-    ranksHeading,
-    grindRankGrid,
-    premiumHeading,
-    premiumIntro,
-    premiumRankGrid
-);
-
-add(
-    ranksSection,
-    ranksContainer
-);
-
-main.appendChild(ranksSection);
-
-const howSection = create("section", {
-    className: "section",
-    id: "how-to-buy"
-});
-
-const howContainer = create("div", {
-    className: "container wrap"
-});
-
-const howHeading = create("div", {
-    className: "section-heading"
-});
-
-add(
-    howHeading,
-    create("p", {
-        className: "kicker",
-        text: "Come join us"
-    }),
-    create("h2", {
-        text: "YOUR NEXT SESSION STARTS HERE."
-    }),
-    create("p", {
-        className: "section-intro",
-        text:
-            "Getting started is simple. Join the community, enter the SMP, and start building your own story."
-    })
-);
-
-const howGrid = create("div", {
-    className: "how-grid"
-});
-
-const steps = [
-    {
-        number: "01",
-        label: "CONTACT",
-        title: "JOIN OUR DISCORD",
-        description:
-            "Reach the community and team through our official Discord."
-    },
-    {
-        number: "02",
-        label: "SETTLE IN",
-        title: "MAKE YOUR MARK",
-        description:
-            "Join the SMP, explore the world, meet players, and build your home."
-    },
-    {
-        number: "03",
-        label: "LEVEL UP",
-        title: "GET A PREMIUM RANK",
-        description:
-            "Contact us through Discord for Donator+ or Donatormax details."
-    }
-];
-
-steps.forEach(stepData => {
-    const step = create("article", {
-        className: "step"
-    });
-
-    add(
-        step,
-        create("div", {
-            className: "step-number",
-            text: stepData.number
-        }),
-        create("p", {
-            className: "kicker",
-            text: stepData.label
-        }),
-        create("h3", {
-            text: stepData.title
-        }),
-        create("p", {
-            text: stepData.description
-        })
-    );
-
-    howGrid.appendChild(step);
-});
-
-add(
-    howContainer,
-    howHeading,
-    howGrid,
-    communityPanel
-);
-
-add(
-    howSection,
-    howContainer
-);
-
-main.appendChild(howSection);
-
-app.appendChild(main);
-
-const footer = create("footer");
-
-const footerContainer = create("div", {
-    className: "container wrap footer-inner"
-});
-
-const footerBrand = create("a", {
-    className: "brand",
-    attributes: {
-        href: "#home"
-    }
-});
-
-const footerLogo = create("img", {
-    className: "brand-logo",
-    attributes: {
-        src: "image/katipunan-logo.png",
-        alt: "Katipunan SMP logo"
-    }
-});
-
-const footerBrandText = create("span", {
-    text: "KATIPUNAN SMP"
-});
-
-add(
-    footerBrand,
-    footerLogo,
-    footerBrandText
-);
-
-const footerNotice = create("p", {
-    text: "Not an official Minecraft product or service."
-});
-
-const footerLinks = create("div", {
-    className: "footer-links"
-});
-
-add(
-    footerLinks,
-    createNavLink(
-        "The server",
-        "#server"
-    ),
-    createNavLink(
-        "Discover",
-        "#discover"
-    ),
-    createNavLink(
-        "Community",
-        "#community"
-    ),
-    createNavLink(
-        "Ranks",
-        "#ranks"
-    ),
-    create("a", {
-        attributes: {
-            href: "https://discord.gg/katipunansmp",
-            target: "_blank",
-            rel: "noopener noreferrer"
-        },
-        text: "Discord ↗"
-    })
-);
-
-add(
-    footerContainer,
-    footerBrand,
-    footerNotice,
-    footerLinks
-);
-
-footer.appendChild(footerContainer);
-app.appendChild(footer);
-
-function initializeNavigation() {
-    const button = document.querySelector(
-        ".menu-toggle"
-    );
-
-    const links = document.querySelector(
-        ".nav-links"
-    );
-
-    if (!button || !links) {
-        return;
-    }
-
-    button.addEventListener(
-        "click",
-        () => {
-            const isOpen =
-                links.classList.toggle("open");
-
-            button.setAttribute(
-                "aria-expanded",
-                String(isOpen)
-            );
-
-            button.setAttribute(
-                "aria-label",
-                isOpen
-                    ? "Close navigation menu"
-                    : "Open navigation menu"
-            );
-        }
-    );
-
-    links.querySelectorAll("a").forEach(
-        link => {
-            link.addEventListener(
-                "click",
-                () => {
-                    links.classList.remove(
-                        "open"
-                    );
-
-                    button.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                    button.setAttribute(
-                        "aria-label",
-                        "Open navigation menu"
-                    );
-                }
-            );
-        }
-    );
-}
-
-function initializeGallery() {
-    const track = document.querySelector(
-        ".build-gallery-track"
-    );
-
-    const buttons = document.querySelectorAll(
-        "[data-gallery-direction]"
-    );
-
-    if (!track || !buttons.length) {
-        return;
-    }
-
-    const updateButtons = () => {
-        const maxScroll =
-            track.scrollWidth -
-            track.clientWidth;
-
-        buttons.forEach(button => {
-            const direction = Number(
-                button.dataset.galleryDirection
-            );
-
-            if (direction < 0) {
-                button.disabled =
-                    track.scrollLeft <= 0;
-            } else {
-                button.disabled =
-                    track.scrollLeft >=
-                    maxScroll - 1;
-            }
-        });
+        footer: "SURVIVE ✦ BUILD ✦ EXPLORE"
     };
 
-    buttons.forEach(button => {
-        button.addEventListener(
-            "click",
-            () => {
-                const direction = Number(
-                    button.dataset.galleryDirection
+    /* ======================================
+       ORIGINAL COLOR SCHEME
+    ====================================== */
+
+    const colors = {
+        bg: "#120e08",
+        bgDeep: "#070604",
+
+        panel: "#21180b",
+        panelLight: "#2d210e",
+        panelBright: "#3a2a12",
+
+        gold: "#e6b94f",
+        goldLight: "#f7d778",
+        goldBright: "#ffe9a3",
+        goldDark: "#b88624",
+
+        text: "#faf3df",
+        muted: "#c9bfa8",
+
+        line: "#513b18",
+        lineLight: "#76591f"
+    };
+
+    /* ======================================
+       LOAD FONTS
+    ====================================== */
+
+    const fontLink = document.createElement("link");
+
+    fontLink.rel = "stylesheet";
+
+    fontLink.href =
+        "https://fonts.googleapis.com/css2?" +
+        "family=DM+Mono:wght@400;500&" +
+        "family=Press+Start+2P&display=swap";
+
+    document.head.appendChild(fontLink);
+
+    /* ======================================
+       LANDING PAGE CSS
+       GENERATED THROUGH JAVASCRIPT
+    ====================================== */
+
+    const landingCSS = document.createElement("style");
+
+    landingCSS.id = "katipunan-landing-styles";
+
+    landingCSS.textContent = `
+
+        /* ==============================
+           RESET
+        ============================== */
+
+        body.katipunan-landing-active {
+            margin: 0;
+            overflow: hidden;
+            background: ${colors.bgDeep};
+        }
+
+        body.katipunan-landing-active
+        #app {
+            display: none !important;
+        }
+
+        body.katipunan-landing-active
+        .ambient-gifs {
+            display: none !important;
+        }
+
+        /* ==============================
+           LANDING SCREEN
+        ============================== */
+
+        #katipunan-landing {
+            position: fixed;
+            inset: 0;
+
+            z-index: 999999;
+
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow-x: hidden;
+            overflow-y: auto;
+
+            box-sizing: border-box;
+
+            padding: 35px 22px;
+
+            background:
+                radial-gradient(
+                    ellipse at 50% 40%,
+                    rgba(230, 185, 79, 0.16),
+                    transparent 58%
+                ),
+                radial-gradient(
+                    ellipse at 50% 90%,
+                    rgba(184, 134, 36, 0.07),
+                    transparent 55%
+                ),
+                linear-gradient(
+                    145deg,
+                    #261c0e 0%,
+                    #1b150b 45%,
+                    #120e08 75%,
+                    #070604 100%
                 );
 
-                track.scrollBy({
-                    left:
-                        track.clientWidth *
-                        0.85 *
-                        direction,
-                    behavior: "smooth"
-                });
+            color: ${colors.text};
+
+            font-family:
+                "DM Mono",
+                monospace;
+
+            isolation: isolate;
+        }
+
+        /* ==============================
+           BACKGROUND GRID
+        ============================== */
+
+        #katipunan-landing::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            z-index: -1;
+
+            background-image:
+                linear-gradient(
+                    rgba(230,185,79,0.035) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(230,185,79,0.035) 1px,
+                    transparent 1px
+                );
+
+            background-size: 44px 44px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    transparent,
+                    black 35%,
+                    black 65%,
+                    transparent
+                );
+
+            pointer-events: none;
+        }
+
+        /* ==============================
+           BACKGROUND GLOW
+        ============================== */
+
+        .landing-glow {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            width: min(85vw, 950px);
+            height: min(70vh, 650px);
+
+            transform:
+                translate(-50%, -50%);
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    ellipse,
+                    rgba(230,185,79,0.12),
+                    transparent 70%
+                );
+
+            filter: blur(35px);
+
+            pointer-events: none;
+
+            z-index: -1;
+        }
+
+        /* ==============================
+           LANDING CONTENT
+        ============================== */
+
+        .landing-content {
+            position: relative;
+
+            width: 100%;
+            max-width: 1100px;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            margin: auto;
+
+            animation:
+                landing-fade-in 1s ease both;
+        }
+
+        /* ==============================
+           WELCOME LABEL
+        ============================== */
+
+        .landing-welcome {
+            margin: 0 0 28px;
+
+            font-family:
+                "DM Mono",
+                monospace;
+
+            font-size: 11px;
+            font-weight: 500;
+
+            line-height: 1.8;
+            letter-spacing: 0.20em;
+
+            color: ${colors.goldLight};
+
+            text-transform: uppercase;
+        }
+
+        /* ==============================
+           ANIMATED GIF BANNER
+        ============================== */
+
+        .landing-banner {
+            display: block;
+
+            width: 100%;
+            max-width: 1050px;
+
+            height: auto;
+            max-height: 62dvh;
+
+            object-fit: contain;
+
+            margin: 0 auto;
+
+            filter:
+                drop-shadow(
+                    0 18px 42px
+                    rgba(0,0,0,0.45)
+                )
+                drop-shadow(
+                    0 0 30px
+                    rgba(230,185,79,0.12)
+                );
+
+            animation:
+                banner-reveal 1.2s ease both;
+        }
+
+        /* ==============================
+           MISSING IMAGE MESSAGE
+        ============================== */
+
+        .landing-banner-fallback {
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            width: min(100%, 850px);
+            min-height: 220px;
+
+            padding: 30px;
+
+            box-sizing: border-box;
+
+            border: 1px dashed
+                ${colors.lineLight};
+
+            border-radius: 8px;
+
+            background:
+                rgba(18,14,8,0.7);
+
+            color: ${colors.goldLight};
+
+            font-family:
+                "Press Start 2P",
+                monospace;
+
+            font-size: 16px;
+            line-height: 2;
+
+            text-align: center;
+        }
+
+        /* ==============================
+           ENTER BUTTON AREA
+        ============================== */
+
+        .landing-button-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 100%;
+
+            margin-top: 38px;
+        }
+
+        /* ==============================
+           GOLD GRADIENT BUTTON
+        ============================== */
+
+        .landing-enter {
+            position: relative;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 15px;
+
+            min-height: 62px;
+
+            padding: 20px 38px;
+
+            box-sizing: border-box;
+
+            border: 1px solid
+                ${colors.goldLight};
+
+            border-radius: 5px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    ${colors.goldBright} 0%,
+                    ${colors.goldLight} 30%,
+                    ${colors.gold} 65%,
+                    ${colors.goldDark} 100%
+                );
+
+            color: ${colors.bgDeep};
+
+            font-family:
+                "Press Start 2P",
+                monospace;
+
+            font-size: 11px;
+            line-height: 1.8;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 0 #77541c,
+                0 14px 32px
+                    rgba(0,0,0,0.35),
+                0 0 28px
+                    rgba(230,185,79,0.15);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                filter 0.25s ease;
+        }
+
+        .landing-enter:hover {
+            transform: translateY(-4px);
+
+            filter: brightness(1.1);
+
+            box-shadow:
+                0 12px 0 #77541c,
+                0 20px 40px
+                    rgba(0,0,0,0.45),
+                0 0 42px
+                    rgba(230,185,79,0.35);
+        }
+
+        .landing-enter:active {
+            transform: translateY(5px);
+
+            box-shadow:
+                0 3px 0 #77541c,
+                0 8px 18px
+                    rgba(0,0,0,0.3);
+        }
+
+        .landing-enter:focus-visible {
+            outline: 3px solid
+                ${colors.goldBright};
+
+            outline-offset: 6px;
+        }
+
+        .landing-enter:disabled {
+            cursor: wait;
+            opacity: 0.8;
+        }
+
+        /* ==============================
+           BUTTON ARROW
+        ============================== */
+
+        .landing-enter-arrow {
+            display: inline-block;
+
+            font-size: 16px;
+
+            transition:
+                transform 0.25s ease;
+        }
+
+        .landing-enter:hover
+        .landing-enter-arrow {
+            transform: translateX(5px);
+        }
+
+        /* ==============================
+           BOTTOM TEXT
+        ============================== */
+
+        .landing-bottom {
+            position: absolute;
+
+            bottom: 22px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: max-content;
+            max-width: 90%;
+
+            color: ${colors.muted};
+
+            font-size: 9px;
+            letter-spacing: 0.16em;
+
+            text-align: center;
+
+            opacity: 0.7;
+        }
+
+        /* ==============================
+           TRANSITION
+        ============================== */
+
+        #katipunan-landing.landing-exit {
+            opacity: 0;
+            visibility: hidden;
+
+            transition:
+                opacity 0.65s ease,
+                visibility 0.65s ease;
+        }
+
+        /* ==============================
+           MAIN WEBSITE
+        ============================== */
+
+        body.katipunan-website-active {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* GIF ONLY ON THE LANDING PAGE */
+
+        body.katipunan-website-active
+        .hero-banner {
+            display: none !important;
+        }
+
+        body.katipunan-website-active
+        .banner-placeholder {
+            display: none !important;
+        }
+
+        /* ==============================
+           ANIMATIONS
+        ============================== */
+
+        @keyframes landing-fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
             }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes banner-reveal {
+            from {
+                opacity: 0;
+                transform: scale(0.94);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* ==============================
+           TABLET
+        ============================== */
+
+        @media (max-width: 768px) {
+            #katipunan-landing {
+                padding: 30px 18px;
+            }
+
+            .landing-welcome {
+                font-size: 9px;
+                letter-spacing: 0.13em;
+            }
+
+            .landing-banner {
+                max-height: 55dvh;
+            }
+
+            .landing-button-wrapper {
+                margin-top: 30px;
+            }
+
+            .landing-enter {
+                min-height: 54px;
+                padding: 18px 26px;
+                font-size: 9px;
+            }
+        }
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 480px) {
+            #katipunan-landing {
+                padding: 24px 12px 48px;
+            }
+
+            .landing-welcome {
+                margin-bottom: 20px;
+                font-size: 8px;
+            }
+
+            .landing-banner {
+                max-height: 50dvh;
+            }
+
+            .landing-button-wrapper {
+                margin-top: 26px;
+            }
+
+            .landing-enter {
+                min-height: 52px;
+                padding: 16px 20px;
+                font-size: 8px;
+            }
+
+            .landing-bottom {
+                bottom: 15px;
+                font-size: 7px;
+            }
+        }
+
+        /* ==============================
+           REDUCED MOTION
+        ============================== */
+
+        @media (prefers-reduced-motion: reduce) {
+            #katipunan-landing *,
+            #katipunan-landing {
+                animation-duration:
+                    0.01ms !important;
+
+                transition-duration:
+                    0.01ms !important;
+            }
+        }
+    `;
+
+    document.head.appendChild(landingCSS);
+
+    /* ======================================
+       CREATE LANDING PAGE
+    ====================================== */
+
+    function createLandingPage() {
+        document.body.classList.add(
+            "katipunan-landing-active"
         );
-    });
 
-    track.addEventListener(
-        "scroll",
-        updateButtons
-    );
+        const landing = document.createElement("main");
 
-    window.addEventListener(
-        "resize",
-        updateButtons
-    );
+        landing.id = "katipunan-landing";
 
-    updateButtons();
-}
+        landing.setAttribute(
+            "aria-label",
+            "Katipunan SMP welcome page"
+        );
 
-function initializeFloatingDecor() {
-    const layer = create("div", {
-        className: "ambient-gifs"
-    });
+        const glow = document.createElement("div");
 
-    const glyphs = [
-        "✦",
-        "✧",
-        "❖",
-        "◆",
-        "✺",
-        "⚒",
-        "⛏",
-        "✹",
-        "✴",
-        "❋"
-    ];
+        glow.className = "landing-glow";
 
-    for (
-        let index = 0;
-        index < 12;
-        index++
-    ) {
-        const item = create("div", {
-            className: "ambient-gif",
-            text:
-                glyphs[
-                    index % glyphs.length
-                ]
+        glow.setAttribute("aria-hidden", "true");
+
+        const content = document.createElement("div");
+
+        content.className = "landing-content";
+
+        /* WELCOME LABEL */
+
+        const welcome = document.createElement("p");
+
+        welcome.className = "landing-welcome";
+
+        welcome.textContent = `✦ ${CONFIG.title} ✦`;
+
+        /* ANIMATED GIF */
+
+        const banner = document.createElement("img");
+
+        banner.className = "landing-banner";
+
+        banner.src = CONFIG.banner;
+
+        banner.alt = "Katipunan SMP animated banner";
+
+        banner.fetchPriority = "high";
+
+        /* FALLBACK IF GIF IS MISSING */
+
+        const fallback = document.createElement("div");
+
+        fallback.className = "landing-banner-fallback";
+
+        fallback.textContent = "KATIPUNAN SMP";
+
+        banner.addEventListener("error", () => {
+            banner.style.display = "none";
+            fallback.style.display = "flex";
         });
 
-        const driftX =
-            `${Math.floor(
-                Math.random() * 180 - 90
-            )}px`;
+        /* BUTTON WRAPPER */
 
-        const driftY =
-            `${Math.floor(
-                Math.random() * 180 - 90
-            )}px`;
+        const buttonWrapper =
+            document.createElement("div");
 
-        const driftXAlt =
-            `${Math.floor(
-                Math.random() * 180 - 90
-            )}px`;
+        buttonWrapper.className =
+            "landing-button-wrapper";
 
-        const driftYAlt =
-            `${Math.floor(
-                Math.random() * 180 - 90
-            )}px`;
+        /* ENTER BUTTON */
 
-        item.style.left =
-            `${Math.random() * 100}%`;
+        const enterButton =
+            document.createElement("button");
 
-        item.style.top =
-            `${Math.random() * 100}%`;
+        enterButton.type = "button";
 
-        item.style.setProperty(
-            "--drift-x",
-            driftX
+        enterButton.className = "landing-enter";
+
+        const buttonText =
+            document.createElement("span");
+
+        buttonText.textContent = CONFIG.button;
+
+        const arrow = document.createElement("span");
+
+        arrow.className = "landing-enter-arrow";
+
+        arrow.textContent = "→";
+
+        arrow.setAttribute("aria-hidden", "true");
+
+        enterButton.append(buttonText, arrow);
+
+        buttonWrapper.appendChild(enterButton);
+
+        /* BOTTOM TEXT */
+
+        const bottom = document.createElement("p");
+
+        bottom.className = "landing-bottom";
+
+        bottom.textContent = CONFIG.footer;
+
+        /* BUILD PAGE */
+
+        content.append(
+            welcome,
+            banner,
+            fallback,
+            buttonWrapper
         );
 
-        item.style.setProperty(
-            "--drift-y",
-            driftY
+        landing.append(
+            glow,
+            content,
+            bottom
         );
 
-        item.style.setProperty(
-            "--drift-x-alt",
-            driftXAlt
-        );
+        document.body.prepend(landing);
 
-        item.style.setProperty(
-            "--drift-y-alt",
-            driftYAlt
-        );
+        /* ENTER WEBSITE */
 
-        item.style.setProperty(
-            "--duration",
-            `${18 + Math.random() * 18}s`
-        );
-
-        item.style.setProperty(
-            "--sprite-opacity",
-            `${0.08 + Math.random() * 0.1}`
-        );
-
-        layer.appendChild(item);
+        enterButton.addEventListener("click", () => {
+            enterWebsite(landing, enterButton);
+        });
     }
 
-    document.body.prepend(layer);
-}
+    /* ======================================
+       LOAD EXISTING WEBSITE
+    ====================================== */
 
-initializeNavigation();
-initializeGallery();
-initializeFloatingDecor();
+    function loadWebsiteScript() {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement("script");
+
+            script.src = CONFIG.websiteScript;
+
+            script.onload = resolve;
+
+            script.onerror = () => {
+                reject(
+                    new Error(
+                        "Could not load " +
+                        CONFIG.websiteScript
+                    )
+                );
+            };
+
+            document.body.appendChild(script);
+        });
+    }
+
+    /* ======================================
+       REMOVE DUPLICATE HERO BANNER
+    ====================================== */
+
+    function removeMainWebsiteBanner() {
+        const mainBanner =
+            document.querySelector(
+                "#app .hero-banner"
+            );
+
+        if (!mainBanner) return;
+
+        const placeholder =
+            mainBanner.previousElementSibling;
+
+        if (
+            placeholder &&
+            placeholder.classList.contains(
+                "banner-placeholder"
+            )
+        ) {
+            placeholder.remove();
+        }
+
+        mainBanner.remove();
+    }
+
+    /* ======================================
+       ENTER WEBSITE
+    ====================================== */
+
+    let websiteLoaded = false;
+    let websiteLoading = false;
+
+    async function enterWebsite(
+        landing,
+        enterButton
+    ) {
+        if (websiteLoading) return;
+
+        websiteLoading = true;
+
+        enterButton.disabled = true;
+
+        const buttonText =
+            enterButton.querySelector("span");
+
+        const originalText = buttonText.textContent;
+
+        buttonText.textContent = "LOADING...";
+
+        try {
+            if (!websiteLoaded) {
+                await loadWebsiteScript();
+
+                websiteLoaded = true;
+
+                removeMainWebsiteBanner();
+            }
+
+            /* ENABLE MAIN WEBSITE */
+
+            document.body.classList.remove(
+                "katipunan-landing-active"
+            );
+
+            document.body.classList.add(
+                "katipunan-website-active"
+            );
+
+            /* SHOW WEBSITE FROM THE TOP */
+
+            window.scrollTo(0, 0);
+
+            /* FADE OUT LANDING PAGE */
+
+            landing.classList.add("landing-exit");
+
+            const reducedMotion =
+                window.matchMedia(
+                    "(prefers-reduced-motion: reduce)"
+                ).matches;
+
+            const delay = reducedMotion ? 0 : 650;
+
+            window.setTimeout(() => {
+                landing.remove();
+            }, delay);
+
+        } catch (error) {
+            console.error(
+                "Katipunan SMP loading error:",
+                error
+            );
+
+            buttonText.textContent =
+                "TRY AGAIN";
+
+            enterButton.disabled = false;
+
+            websiteLoading = false;
+
+            window.alert(
+                "The main website could not load. " +
+                "Please make sure site.js is " +
+                "in the same folder as this file."
+            );
+        }
+    }
+
+    /* ======================================
+       INITIALIZE LANDING PAGE
+    ====================================== */
+
+    function initializeLanding() {
+        if (
+            document.getElementById(
+                "katipunan-landing"
+            )
+        ) {
+            return;
+        }
+
+        createLandingPage();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded",
+            initializeLanding,
+            { once: true }
+        );
+    } else {
+        initializeLanding();
+    }
+
+})();
