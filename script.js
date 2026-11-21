@@ -1,18 +1,5 @@
-
-/* ==========================================
-   KATIPUNAN SMP
-   FULLSCREEN LANDING PAGE
-
-   Original website: site.js
-   Original stylesheet: styles.css
-========================================== */
-
 (() => {
     "use strict";
-
-    /* ======================================
-       CONFIGURATION
-    ====================================== */
 
     const CONFIG = {
         websiteScript: "site.js",
@@ -26,10 +13,6 @@
 
         footer: "SURVIVE ✦ BUILD ✦ EXPLORE"
     };
-
-    /* ======================================
-       ORIGINAL COLOR SCHEME
-    ====================================== */
 
     const colors = {
         bg: "#120e08",
@@ -51,9 +34,6 @@
         lineLight: "#76591f"
     };
 
-    /* ======================================
-       LOAD FONTS
-    ====================================== */
 
     const fontLink = document.createElement("link");
 
@@ -66,20 +46,12 @@
 
     document.head.appendChild(fontLink);
 
-    /* ======================================
-       LANDING PAGE CSS
-       GENERATED THROUGH JAVASCRIPT
-    ====================================== */
-
     const landingCSS = document.createElement("style");
 
     landingCSS.id = "katipunan-landing-styles";
 
     landingCSS.textContent = `
 
-        /* ==============================
-           RESET
-        ============================== */
 
         body.katipunan-landing-active {
             margin: 0;
@@ -96,10 +68,6 @@
         .ambient-gifs {
             display: none !important;
         }
-
-        /* ==============================
-           LANDING SCREEN
-        ============================== */
 
         #katipunan-landing {
             position: fixed;
@@ -150,10 +118,6 @@
             isolation: isolate;
         }
 
-        /* ==============================
-           BACKGROUND GRID
-        ============================== */
-
         #katipunan-landing::before {
             content: "";
 
@@ -187,10 +151,6 @@
             pointer-events: none;
         }
 
-        /* ==============================
-           BACKGROUND GLOW
-        ============================== */
-
         .landing-glow {
             position: absolute;
 
@@ -219,10 +179,6 @@
             z-index: -1;
         }
 
-        /* ==============================
-           LANDING CONTENT
-        ============================== */
-
         .landing-content {
             position: relative;
 
@@ -243,10 +199,6 @@
                 landing-fade-in 1s ease both;
         }
 
-        /* ==============================
-           WELCOME LABEL
-        ============================== */
-
         .landing-welcome {
             margin: 0 0 28px;
 
@@ -264,10 +216,6 @@
 
             text-transform: uppercase;
         }
-
-        /* ==============================
-           ANIMATED GIF BANNER
-        ============================== */
 
         .landing-banner {
             display: block;
@@ -295,10 +243,6 @@
             animation:
                 banner-reveal 1.2s ease both;
         }
-
-        /* ==============================
-           MISSING IMAGE MESSAGE
-        ============================== */
 
         .landing-banner-fallback {
             display: none;
@@ -333,10 +277,6 @@
             text-align: center;
         }
 
-        /* ==============================
-           ENTER BUTTON AREA
-        ============================== */
-
         .landing-button-wrapper {
             display: flex;
             align-items: center;
@@ -346,10 +286,6 @@
 
             margin-top: 38px;
         }
-
-        /* ==============================
-           GOLD GRADIENT BUTTON
-        ============================== */
 
         .landing-enter {
             position: relative;
@@ -440,10 +376,6 @@
             opacity: 0.8;
         }
 
-        /* ==============================
-           BUTTON ARROW
-        ============================== */
-
         .landing-enter-arrow {
             display: inline-block;
 
@@ -457,10 +389,6 @@
         .landing-enter-arrow {
             transform: translateX(5px);
         }
-
-        /* ==============================
-           BOTTOM TEXT
-        ============================== */
 
         .landing-bottom {
             position: absolute;
@@ -483,10 +411,6 @@
             opacity: 0.7;
         }
 
-        /* ==============================
-           TRANSITION
-        ============================== */
-
         #katipunan-landing.landing-exit {
             opacity: 0;
             visibility: hidden;
@@ -495,10 +419,6 @@
                 opacity 0.65s ease,
                 visibility 0.65s ease;
         }
-
-        /* ==============================
-           MAIN WEBSITE
-        ============================== */
 
         body.katipunan-website-active {
             overflow-x: hidden;
@@ -516,10 +436,6 @@
         .banner-placeholder {
             display: none !important;
         }
-
-        /* ==============================
-           ANIMATIONS
-        ============================== */
 
         @keyframes landing-fade-in {
             from {
@@ -545,10 +461,6 @@
             }
         }
 
-        /* ==============================
-           TABLET
-        ============================== */
-
         @media (max-width: 768px) {
             #katipunan-landing {
                 padding: 30px 18px;
@@ -573,10 +485,6 @@
                 font-size: 9px;
             }
         }
-
-        /* ==============================
-           MOBILE
-        ============================== */
 
         @media (max-width: 480px) {
             #katipunan-landing {
@@ -608,10 +516,6 @@
             }
         }
 
-        /* ==============================
-           REDUCED MOTION
-        ============================== */
-
         @media (prefers-reduced-motion: reduce) {
             #katipunan-landing *,
             #katipunan-landing {
@@ -625,10 +529,6 @@
     `;
 
     document.head.appendChild(landingCSS);
-
-    /* ======================================
-       CREATE LANDING PAGE
-    ====================================== */
 
     function createLandingPage() {
         document.body.classList.add(
@@ -654,15 +554,11 @@
 
         content.className = "landing-content";
 
-        /* WELCOME LABEL */
-
         const welcome = document.createElement("p");
 
         welcome.className = "landing-welcome";
 
         welcome.textContent = `✦ ${CONFIG.title} ✦`;
-
-        /* ANIMATED GIF */
 
         const banner = document.createElement("img");
 
@@ -687,15 +583,11 @@
             fallback.style.display = "flex";
         });
 
-        /* BUTTON WRAPPER */
-
         const buttonWrapper =
             document.createElement("div");
 
         buttonWrapper.className =
             "landing-button-wrapper";
-
-        /* ENTER BUTTON */
 
         const enterButton =
             document.createElement("button");
@@ -721,7 +613,6 @@
 
         buttonWrapper.appendChild(enterButton);
 
-        /* BOTTOM TEXT */
 
         const bottom = document.createElement("p");
 
@@ -729,7 +620,6 @@
 
         bottom.textContent = CONFIG.footer;
 
-        /* BUILD PAGE */
 
         content.append(
             welcome,
@@ -746,16 +636,11 @@
 
         document.body.prepend(landing);
 
-        /* ENTER WEBSITE */
 
         enterButton.addEventListener("click", () => {
             enterWebsite(landing, enterButton);
         });
     }
-
-    /* ======================================
-       LOAD EXISTING WEBSITE
-    ====================================== */
 
     function loadWebsiteScript() {
         return new Promise((resolve, reject) => {
@@ -777,10 +662,6 @@
             document.body.appendChild(script);
         });
     }
-
-    /* ======================================
-       REMOVE DUPLICATE HERO BANNER
-    ====================================== */
 
     function removeMainWebsiteBanner() {
         const mainBanner =
@@ -804,10 +685,6 @@
 
         mainBanner.remove();
     }
-
-    /* ======================================
-       ENTER WEBSITE
-    ====================================== */
 
     let websiteLoaded = false;
     let websiteLoading = false;
@@ -838,7 +715,6 @@
                 removeMainWebsiteBanner();
             }
 
-            /* ENABLE MAIN WEBSITE */
 
             document.body.classList.remove(
                 "katipunan-landing-active"
@@ -848,11 +724,7 @@
                 "katipunan-website-active"
             );
 
-            /* SHOW WEBSITE FROM THE TOP */
-
             window.scrollTo(0, 0);
-
-            /* FADE OUT LANDING PAGE */
 
             landing.classList.add("landing-exit");
 
@@ -887,10 +759,6 @@
             );
         }
     }
-
-    /* ======================================
-       INITIALIZE LANDING PAGE
-    ====================================== */
 
     function initializeLanding() {
         if (

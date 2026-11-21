@@ -1,10 +1,6 @@
 
 @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Press+Start+2P&display=swap");
 
-/* ==========================================
-   KATIPUNAN SMP — COMPLETE STYLESHEET
-   ========================================== */
-
 :root {
     color-scheme: dark;
     --bg: #120e08;
@@ -29,8 +25,6 @@
     --mono: "DM Mono", monospace;
     --pixel: "Press Start 2P", monospace;
 }
-
-/* GLOBAL */
 
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 70px; }
@@ -58,8 +52,6 @@ ul { padding-left: 0; }
     max-width: 1120px;
     margin-inline: auto;
 }
-
-/* AMBIENT ELEMENTS */
 
 .ambient-gifs {
     position: fixed;
@@ -89,8 +81,6 @@ ul { padding-left: 0; }
     50% { transform: translate3d(var(--drift-x,10px),var(--drift-y-alt,-15px),0) scale(1) rotate(8deg); }
     100% { transform: translate3d(var(--drift-x-alt,-10px),var(--drift-y,15px),0) scale(.96) rotate(-5deg); }
 }
-
-/* NAVIGATION */
 
 .topbar {
     position: sticky;
@@ -230,7 +220,6 @@ h1 span { color: var(--gold-light); }
 }
 .server-ip-box { max-width: 100%; overflow-wrap: anywhere; }
 
-/* GENERAL SECTIONS */
 
 .section { position: relative; display: flex; align-items: flex-start; min-height: auto; padding: 110px 0; }
 .section > .wrap, .section > .container.wrap {
@@ -252,7 +241,6 @@ h1 span { color: var(--gold-light); }
 h2 { margin-bottom: 20px; font: 400 clamp(18px,2.6vw,25px)/1.75 var(--pixel); }
 .section-intro { max-width: 780px; margin-bottom: 0; color: var(--muted); font-size: 13px; line-height: 2; }
 
-/* SERVER FEATURE CARDS */
 
 .perk-grid {
     display: grid;
@@ -295,9 +283,6 @@ h2 { margin-bottom: 20px; font: 400 clamp(18px,2.6vw,25px)/1.75 var(--pixel); }
 .perk h3 { margin-bottom: 17px; color: var(--text); font: 400 14px/1.75 var(--pixel); }
 .perk p { margin-bottom: 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
 
-/* ==========================================
-   DISCOVER — LARGER, VERTICALLY CENTERED
-   ========================================== */
 
 #discover.section.discover-section {
     display: flex;
@@ -437,10 +422,6 @@ h2 { margin-bottom: 20px; font: 400 clamp(18px,2.6vw,25px)/1.75 var(--pixel); }
     font-size: 13px;
 }
 
-/* ==========================================
-   GRINDABLE RANKS — SLIGHTLY WIDER
-   ========================================== */
-
 @media (min-width: 1001px) {
     #ranks > .wrap,
     #ranks > .container.wrap {
@@ -572,8 +553,6 @@ h2 { margin-bottom: 20px; font: 400 clamp(18px,2.6vw,25px)/1.75 var(--pixel); }
 .grind-cost strong { color: var(--gold-light); font-size: 15px; font-weight: 500; }
 
 
-/* PREMIUM RANKS */
-
 .premium-rank-grid {
     display: grid;
     grid-template-columns: repeat(2,minmax(0,1fr));
@@ -663,8 +642,6 @@ h2 { margin-bottom: 20px; font: 400 clamp(18px,2.6vw,25px)/1.75 var(--pixel); }
 }
 .fine-print { margin: 20px 0 0; color: var(--muted); font-size: 11px; line-height: 1.8; }
 
-/* HOW TO JOIN */
-
 .how-grid {
     display: grid;
     grid-template-columns: repeat(3,minmax(0,1fr));
@@ -682,8 +659,6 @@ h2 { margin-bottom: 20px; font: 400 clamp(18px,2.6vw,25px)/1.75 var(--pixel); }
 .step-number { margin-bottom: 20px; color: var(--gold); font-size: 12px; }
 .step h3 { margin-bottom: 15px; font: 400 10px/2 var(--pixel); }
 .step p { margin-bottom: 0; color: var(--muted); font-size: 13px; line-height: 1.95; }
-
-/* COMMUNITY */
 
 #community.community-panel, .community-panel {
     display: grid;
@@ -737,8 +712,6 @@ h2 { margin-bottom: 20px; font: 400 clamp(18px,2.6vw,25px)/1.75 var(--pixel); }
 .inline-link { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
 .inline-link:hover { color: var(--gold-light); }
 
-/* NOTICE AND FOOTER */
-
 .notice {
     padding: 34px;
     border: 1px solid #80632b;
@@ -763,8 +736,6 @@ footer {
 .footer-links a { color: var(--muted); font-size: 11px; }
 .footer-links a:hover { color: var(--gold-light); }
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
-
-/* RESPONSIVE — TABLET */
 
 @media (max-width: 1000px) {
     .wrap, .container.wrap, .section > .wrap, .section > .container.wrap { width: calc(100% - 64px); }
@@ -791,8 +762,6 @@ footer {
     #community.community-panel, .community-panel { grid-template-columns: 1fr; gap: 32px; }
     .community-callout { min-height: 320px; padding: 32px; }
 }
-
-/* RESPONSIVE — MOBILE */
 
 @media (max-width: 700px) {
     html { scroll-padding-top: 62px; }
@@ -875,8 +844,6 @@ footer {
     }
 }
 
-/* RESPONSIVE — SMALL MOBILE */
-
 @media (max-width: 480px) {
     .wrap, .container.wrap, .section > .wrap, .section > .container.wrap {
         width: calc(100% - 32px);
@@ -903,8 +870,6 @@ footer {
     .footer-links { flex-wrap: wrap; }
 }
 
-/* RESPONSIVE — SHORT SCREENS */
-
 @media (max-height: 750px) and (min-width: 701px) {
     #discover.section.discover-section { padding: 20px 0; }
     #discover .build-gallery-heading { margin-bottom: 16px; }
@@ -913,8 +878,6 @@ footer {
         max-height: 350px;
     }
 }
-
-/* ACCESSIBILITY */
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
