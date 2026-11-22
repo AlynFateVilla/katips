@@ -1055,7 +1055,7 @@ function initializeGallery() {
     const track = document.querySelector(".build-gallery-track");
     const buttons = document.querySelectorAll(
         "[data-gallery-direction]"
-    );
+    ); 
     if (!track || !buttons.length) return;
     const updateButtons = () => {
         const maxScroll = track.scrollWidth - track.clientWidth;
