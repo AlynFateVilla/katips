@@ -1,18 +1,18 @@
 (() => {
     "use strict";
 
-    const CONFIG = {
-        websiteScript: "site.js",
+   const CONFIG = {
+    websiteScript: "site.js",
 
-        banner:
-            "image/Katipunan_SMP_Banner_Animated.gif",
+    banner:
+        "https://classy-swan-03c0b5.netlify.app/image/Katipunan_SMP_Banner_Animated.gif",
 
-        title: "WELCOME TO KATIPUNAN SMP",
+    title: "WELCOME TO KATIPUNAN SMP",
 
-        button: "ENTER WEBSITE",
+    button: "ENTER WEBSITE",
 
-        footer: "SURVIVE ✦ BUILD ✦ EXPLORE"
-    };
+    footer: "SURVIVE ✦ BUILD ✦ EXPLORE"
+};
 
     const colors = {
         bg: "#120e08",
