@@ -439,37 +439,65 @@ const galleryTrack = create("div", {
     className: "build-gallery-track"
 });
 const galleryItems = [
-    ["image/survival-build.png", "Golden hour at the pavilion"],
-    ["image/survival-build-2.png", "A grand bridge beneath the floating sword"],
-    ["image/community-build-3.png", "The castle plaza at sunset"],
-    ["image/community-build-4.png", "Rainy cathedral square"],
-    ["image/community-build-6.png", "Cosmetic shopfront"],
-    ["image/community-build-7.png", "Staff lineup showcase"],
-    ["image/community-build-8.png", "Floating sword monument"],
-    ["image/community-build-10.png", "Dream bridge overlook"],
-    ["image/old-spawn.png", "Old spawn"],
-    ["image/bodyguards.png", "Bodyguards"],
-    ["image/shadow-guardians.png", "Shadow Guardians"],
-    ["image/rainy-house.png", "Rainy seaside house"],
-    ["image/cherry-garden.png", "Cherry blossom gathering"],
-    ["image/cherry-garden-2.png", "Cherry garden event"],
-    ["image/lava-castle.png", "Lava fortress"]
+    ["image/RIft_Event.mov", "The Rift Event — Moments from our latest server gathering.", "video"],
+    ["image/santa.mp4", "A Winter Wonderland — Where snowflakes fall and every corner of spawn feels a little more magical.", "video"],
+    ["image/survival-build.png", "Golden hour at the pavilion", "image"],
+    ["image/survival-build-2.png", "A grand bridge beneath the floating sword", "image"],
+    ["image/community-build-3.png", "A World of Wonders — Every corner holds a new story.", "image"],
+    ["image/community-build-4.png", "Whispers in the Rain — Where even rainy days feel magical.", "image"],
+    ["image/community-build-6.png", "The Cosmetic Corner — A little style for every adventure.", "image"],
+    ["image/community-build-10.png", "Above the Clouds — A peaceful escape from the world below.", "image"],
+    ["image/community-build-11.png", "The Pink Haven — A cozy little place filled with warmth and friendship.", "image"],
+    ["image/bodyguards.png", "The Guardians — Keeping watch, making memories.", "image"],
+    ["image/shadow-guardians.png", "Guardians of the Realm — Different powers, united as one.", "image"],
+    ["image/rainy-house.png", "Side by Side — Every adventure is better with company.", "image"],
+    ["image/lava-castle.png", "The Infernal Kingdom — A fortress forged in fire and mystery.", "image"],
+    ["image/old-portal.png", "Under the Northern Lights — Where the night sky tells its own story.", "image"],
+    ["image/2026-11-06_17.57.52.png", "The Grand Monument — Where creativity meets timeless architecture.", "image"],
+    ["image/2026-11-17_20.36.08.png", "Beyond the Adventure — Great adventures are better together.", "image"],
+    ["image/aki-jason.png", "Under the Same Sky — A little magic in every shared moment.", "image"],
+    ["image/jvson-aki.png", "Golden Hour — Collecting sunsets and little moments together.", "image"],
+    ["image/crunc.png", "Winter's Favorite — A little magic wrapped in snowflakes.", "image"],
+    ["image/crunc-bday.png", "A Slice of Happiness — Sweet celebrations and sweeter memories.", "image"],
+    ["image/pic.png", "A Place to Call Home — Simple beginnings, beautiful memories.", "image"],
+    ["image/wemmbow.png", "After Dark — Where warm lights meet mysterious nights.", "image"],
+    ["image/2026-11-07_16.21.47.png", "Lantern-lit Moments — A quiet moment together, warmed by the glow of home.", "image"],
+    ["image/2026-11-07_16.49.39.png", "The Harbor Haven — A seaside village where every home has a view.", "image"],
+    ["image/2026-11-07_17.14.49.png", "A Little Love, A Big Adventure — Every moment feels a little more magical when we're together.", "image"],
+    ["image/2026-11-08_13.10.51.png", "The Cathedral in the Rain — A grand refuge beneath a storm-dark sky.", "image"],
+    ["image/78560661-e5bc-4295-ac8e-c3ec605632c3.png", "Faces of the Server — Every player brings a story of their own.", "image"],
+    ["image/Untitled137_20261115002901.png", "Meet the Team — The dedicated individuals behind Katipunan SMP, working together to create a welcoming, fair, and memorable experience for every player.", "image"],
+    ["image/image-20.png", "A Season of Celebration — Gathering beneath the glow of the winter tree.", "image"]
+    ["image/2026-11-06T20_23_20.png", "A Moment in Time — Capturing the essence of our community.", "image"]
 ];
-galleryItems.forEach(([src, caption]) => {
+galleryItems.forEach(([src, caption, type]) => {
     const item = create("figure", {
         className: "build-gallery-item"
     });
-    const image = create("img", {
-        attributes: {
-            src,
-            alt: caption,
-            loading: "lazy"
-        }
-    });
+    let media;
+    if (type === "video") {
+        media = create("video", {
+            className: "build-gallery-video",
+            attributes: {
+                src,
+                controls: "",
+                preload: "metadata",
+                playsinline: ""
+            }
+        });
+    } else {
+        media = create("img", {
+            attributes: {
+                src,
+                alt: caption,
+                loading: "lazy"
+            }
+        });
+    }
     const figcaption = create("figcaption", {
         text: caption
     });
-    add(item, image, figcaption);
+    add(item, media, figcaption);
     galleryTrack.appendChild(item);
 });
 add(buildGallery, galleryHeading, galleryTrack);
@@ -1072,14 +1100,16 @@ function initializeGallery() {
         button.addEventListener("click", () => {
             const direction = Number(button.dataset.galleryDirection);
             track.scrollBy({
-                left: track.clientWidth * 0.85 * direction,
+                left: track.clientWidth * direction,
                 behavior: "smooth"
             });
         });
     });
     track.addEventListener("scroll", updateButtons);
     window.addEventListener("resize", updateButtons);
-    updateButtons();
+    window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(updateButtons);
+    });
 }
 function initializeFloatingDecor() {
     const layer = create("div", {
